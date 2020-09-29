@@ -2,7 +2,6 @@ from typing import Any
 
 from aiogram import *
 from aiogram.types import *
-from aiogram import executor
 
 from .settings import API_TOKEN
 from .services.ffmpeg import convert_audio
@@ -17,6 +16,14 @@ dispatcher = Dispatcher(bot)
 def dispatch_query(query: str, context: Any) -> str:
     # Add dispatching code here
     return f'Recognized: {query}'
+
+
+@dispatcher.message_handler(commands=['start'])
+async def welcome(message: Message) -> None:
+    answer = 'Привет! \n' \
+             'Меня зовут Алиса \n' \
+             'Я умею распозновать речь. \n'
+    await message.answer(answer)
 
 
 @dispatcher.message_handler(content_types=ContentType.VOICE)
