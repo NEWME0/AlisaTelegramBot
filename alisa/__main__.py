@@ -1,22 +1,16 @@
-from typing import Any
-
 from aiogram import *
 from aiogram.types import *
 
 from .services.storage import generate_unique_destinations
 from .services.converter import convert_ogg_to_wav
 from .services.recognizer import audio_file_to_text
+from .services.assistant import dispatch_query
 
 from .settings import API_TOKEN
 
 
 bot = Bot(token=API_TOKEN)
 dispatcher = Dispatcher(bot)
-
-
-def dispatch_query(query: str, context: Any) -> str:
-    # Add dispatching code here
-    return f'Recognized: {query}'
 
 
 @dispatcher.message_handler(commands=['start'])
